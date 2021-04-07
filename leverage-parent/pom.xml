@@ -39,6 +39,16 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
     </dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.hakoohakoo.leverageapart</groupId>
+				<artifactId>leverageapart-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
     
     <modules>
     	<module>leverageapart-core</module>

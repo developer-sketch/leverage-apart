@@ -10,4 +10,21 @@
   </parent>
   <artifactId>leverageapart-collector</artifactId>
   <name>leverageapart-collector</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hakoohakoo.leverageapart</groupId>
+			<artifactId>leverageapart-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>
