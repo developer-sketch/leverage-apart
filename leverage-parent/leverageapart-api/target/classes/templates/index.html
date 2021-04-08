@@ -1,0 +1,136 @@
+<!doctype html>  
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">  
+<head>  
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  
+<script src="http://bootstrapk.com/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>  
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous"></script>  
+<!-- <script src="/js/locales/bootstrap-datepicker.ko.js" charset="UTF-8"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<link href="http://bootstrapk.com/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" crossorigin="anonymous">  
+<title>아파트 레버리지</title>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">  
+<style type="text/css">
+body {
+  margin : 2%;
+}
+</style>
+<style type="text/css">  
+.datepicker,  
+.table-condensed {  
+  font-size : xx-large;
+} 
+</style>  
+</head>  
+<body>
+<div id="app" style="padding-top: 70px;">
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">아파트 레버리지</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">임장일지</a></li>
+            <li><a href="/hunt/compareArea">비교평가</a></li>
+            <li><a href="/">추천매물</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav> 
+
+	<div class="container">  
+		<div class="row" style="margin-left: 1px;">
+			<input data-provide="datepicker" id="datePicker" @selected="getHuntAreas">  
+		</div>
+		<div class="page-header">
+			<h4>임장 지역</h4>
+		</div>
+		<div class="row">
+			<div class="list-group" v-for="hunt in hunts">
+				<a :href="'/hunt/qna?huntId='+hunt.id" class="list-group-item">
+					{{hunt.area.doName}} {{hunt.area.cityName}} {{hunt.area.guName}} {{hunt.area.dongName}} | 
+						<code>{{ hunt.huntType.name }}</code>
+						<button type="button" class="btn btn-sm btn-danger" style="position:absolute; bottom:5px; right:5px;" @click="onDelete(hunt.id)">X</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<button type="button" class="btn btn-xl btn-primary" @click="add" style="position:absolute; right:30px;">임장지 추가</button>
+		</div>
+	</div>
+  
+</div>
+<script type="text/javascript"> 
+	var router = new VueRouter({
+		mode: 'history',
+		routes:[]
+	});
+
+	var app = new Vue({ 
+      router,
+		el : '#app', 
+		data : { 
+			hunts : [],
+			link : "",
+			deleteAreaId : 0
+		}, 
+		created() {
+			this.getHuntAreas();
+		},
+		methods : { 
+			getHuntAreas : function() {
+				var huntDate = $("#datePicker").val();
+				if (huntDate == "") huntDate = new Date();
+				fetch("/api/hunt/list?huntDate="+moment(huntDate).format("YYMMDD"))
+				.then((response) => {
+					if(response.ok) {
+						return response.json();
+					}
+					throw new Error("Network response was not ok");
+				})
+				.then((json) => {
+					this.$data.hunts = json;
+				}) 
+			},
+			add : function() {
+				location.href = "/hunt/areaRegister";
+			},
+			onDelete : function(id) {
+				if (confirm("삭제하시겠습니까?")) {
+					axios.delete('/rest/hunts/'+id)
+			        .then(function(res){
+			        	alert("삭제했습니다.");
+			        	window.location.reload();
+			        }.bind(this)).catch(function(e){
+			          	alert(e);
+			        });
+		        }
+			}
+		} 
+	});
+	$("#datePicker").datepicker({
+		format : "yyyy-mm-dd",
+		autoclose : true,
+		todayHighlight : true,
+		language : 'ko',
+		orientation : 'left'
+	}).datepicker("setDate",'now');
+	$("#datePicker").on("changeDate", function(){
+		$(".datePicker").css("left", 0);
+		app.getHuntAreas();
+	});
+	
+</script> 
+</body>  
+</html>

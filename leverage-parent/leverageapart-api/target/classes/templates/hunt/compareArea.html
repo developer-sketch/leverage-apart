@@ -1,0 +1,92 @@
+<!doctype html>  
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">  
+<head>  
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>  
+<script src="http://bootstrapk.com/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>  
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+<link href="http://bootstrapk.com/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">  
+<title>아파트 레버리지</title>
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">  
+<style type="text/css">
+body {
+  margin : 2%;
+}
+</style>
+</head>  
+<body role="document">
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">아파트 레버리지</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/">임장일지</a></li>
+          <li class="active"><a href="/hunt/compareArea">비교평가</a></li>
+          <li><a href="/">추천매물</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="app" role="main" style="margin-top:5%">
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th> 지역 </th>
+            <th v-for="question in questions"> {{ question.text }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="hunt in hunts">
+            <td> {{ hunt.area.doName }}  {{ hunt.area.cityName }} {{ hunt.area.guName }} </td>
+            <td v-for="question in questions">
+              <span v-if="question.answerType.isChoice &&  hunt.userChoiceAnswers[question.id] == null"> </span>
+              <span v-else-if="question.answerType.isChoice &&  hunt.userChoiceAnswers[question.id] != null">{{ hunt.userChoiceAnswers[question.id].answer.name }}</span>
+              <span v-else-if="!question.answerType.isChoice &&  hunt.userEssayAnswers[question.id] != null">{{ hunt.userEssayAnswers[question.id].content }}</span>
+              <span v-else-if="!question.answerType.isChoice &&  hunt.userEssayAnswers[question.id] == null"> </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+	var app = new Vue({
+	    el: '#app',
+	    data : {
+        questions : {},
+        hunts : []
+	    }, 
+		created() {
+			fetch("/api/hunt/compareArea")
+			.then((response) => {
+				if(response.ok) {
+					return response.json();
+				}
+				throw new Error("Network response was not ok");
+			})
+			.then((json) => {
+            this.$data.questions = json.questions;
+            this.$data.hunts = json.hunts;
+			})
+		}, methods : {
+    }
+    });
+</script>
+</body>
+</html>
