@@ -35,12 +35,12 @@ public class CallTest {
 				.body(BodyInserters.fromFormData("kapt_code", aptCode))
 				.retrieve()
 				.bodyToFlux(KaptDetailResponse.class).log();
-			}).log().blockLast();
+			}).blockLast();
 		
 		
 		StepVerifier.create(response)
 			.expectSubscription()
-			.consumeNextWith(res -> log.debug("res : {}", res))
+			.consumeNextWith(res -> {})
 			.verifyComplete();
 	}
 }
