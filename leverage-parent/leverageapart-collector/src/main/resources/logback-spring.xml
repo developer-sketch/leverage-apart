@@ -5,6 +5,7 @@
     <logger name="org.hibernate.SQL" level="DEBUG" />
     <logger name="org.hibernate.loader" level="DEBUG" />
     <logger name="com.hakoohakoo.leverageapart" level="DEBUG" />
+    <logger name="org.springframework.data.r2dbc" level="DEBUG" />
     <root level="INFO">
     	<appender-ref ref="CONSOLE"/>
     </root>

@@ -12,14 +12,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hakoohakoo.leverageapart.rawdata.KaptDetailResponse;
+import com.hakoohakoo.leverageapart.core.rawdata.KaptDetailResponse;
 
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 
-@Slf4j
 public class CallTest {
 	@Test
 	public void kaptCall() throws Exception {	
