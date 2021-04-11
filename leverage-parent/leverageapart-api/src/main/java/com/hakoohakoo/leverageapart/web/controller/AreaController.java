@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hakoohakoo.leverageapart.mapper.AreaMapper;
-import com.hakoohakoo.leverageapart.model.Area;
-import com.hakoohakoo.leverageapart.repository.AreaRepository;
+import com.hakoohakoo.leverageapart.core.mapper.AreaMapper;
+import com.hakoohakoo.leverageapart.core.model.Area;
+import com.hakoohakoo.leverageapart.core.repository.AreaRepository;
 
 @RestController
 @RequestMapping("/api/area")

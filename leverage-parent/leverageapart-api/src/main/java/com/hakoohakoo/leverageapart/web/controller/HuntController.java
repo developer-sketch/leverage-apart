@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.hakoohakoo.leverageapart.model.AnswerDescription;
-import com.hakoohakoo.leverageapart.model.ChoiceAnswer;
-import com.hakoohakoo.leverageapart.model.Hunt;
-import com.hakoohakoo.leverageapart.model.HuntCompareModel;
-import com.hakoohakoo.leverageapart.model.HuntQuestionModel;
-import com.hakoohakoo.leverageapart.model.NaverSearchResult;
-import com.hakoohakoo.leverageapart.model.Question;
-import com.hakoohakoo.leverageapart.model.UserChoiceAnswer;
-import com.hakoohakoo.leverageapart.model.UserEssayAnswer;
-import com.hakoohakoo.leverageapart.repository.AnswerDescriptionRepository;
-import com.hakoohakoo.leverageapart.repository.ChoiceAnswerRepository;
-import com.hakoohakoo.leverageapart.repository.HuntRepository;
-import com.hakoohakoo.leverageapart.repository.QuestionRepository;
-import com.hakoohakoo.leverageapart.repository.UserChoiceAnswerRepository;
-import com.hakoohakoo.leverageapart.repository.UserEssayAnswerRepository;
+import com.hakoohakoo.leverageapart.core.model.AnswerDescription;
+import com.hakoohakoo.leverageapart.core.model.ChoiceAnswer;
+import com.hakoohakoo.leverageapart.core.model.Hunt;
+import com.hakoohakoo.leverageapart.core.model.HuntCompareModel;
+import com.hakoohakoo.leverageapart.core.model.HuntQuestionModel;
+import com.hakoohakoo.leverageapart.core.model.NaverSearchResult;
+import com.hakoohakoo.leverageapart.core.model.Question;
+import com.hakoohakoo.leverageapart.core.model.UserChoiceAnswer;
+import com.hakoohakoo.leverageapart.core.model.UserEssayAnswer;
+import com.hakoohakoo.leverageapart.core.repository.AnswerDescriptionRepository;
+import com.hakoohakoo.leverageapart.core.repository.ChoiceAnswerRepository;
+import com.hakoohakoo.leverageapart.core.repository.HuntRepository;
+import com.hakoohakoo.leverageapart.core.repository.QuestionRepository;
+import com.hakoohakoo.leverageapart.core.repository.UserChoiceAnswerRepository;
+import com.hakoohakoo.leverageapart.core.repository.UserEssayAnswerRepository;
 
 @RestController
 @RequestMapping("/api/hunt")
