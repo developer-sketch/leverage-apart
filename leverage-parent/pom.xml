@@ -64,7 +64,7 @@
     <modules>
     	<module>leverageapart-core</module>
     	<module>leverageapart-collector</module>
-    	<module>leverageapart-api</module>
+    	<module>leverageapart-web</module>
     </modules>
 	
 	<build>
