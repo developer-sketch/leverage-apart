@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.hakoohakoo.leverageapart.collector.model.Area;
-import com.hakoohakoo.leverageapart.collector.repository.AreaRepository;
-import com.hakoohakoo.leverageapart.collector.repository.CustomerRepository;
+import com.sketch.leverageapart.collector.model.Area;
+import com.sketch.leverageapart.collector.repository.AreaRepository;
+import com.sketch.leverageapart.collector.repository.CustomerRepository;
 
 import lombok.extern.slf4j.Slf4j;
 

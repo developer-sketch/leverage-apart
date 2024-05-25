@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hakoohakoo.leverageapart.core.rawdata.KaptDetailResponse;
+import com.sketch.leverageapart.core.rawdata.KaptDetailResponse;
 
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
